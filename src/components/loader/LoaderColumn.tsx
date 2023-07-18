@@ -10,7 +10,7 @@ export const LoaderColumn:React.FC<LoaderColumn> = ({variant = "straight",hasMai
      
     return <section className={`loader--container ${variant}`}>
             <div className={`loader__floating--wrapper ${hasMain?"center":""}`} id="">
-                <img src={galery[galeryIndex*4-4]} className={`loader__floating--item ${hasMain?"sideUpperTopSlide":"margin-grow"}`}/>
+                <img src={galery[galeryIndex*4-(hasMain?2:1)]} className={`loader__floating--item ${hasMain?"sideUpperTopSlide":"margin-grow"}`}/>
             </div>
             <div className={`loader__floating--wrapper ${hasMain?"center":""}`}>
                 <img src={galery[galeryIndex*4-3]} className={`loader__floating--item ${hasMain?"sideMainTop":"margin-grow"}`}/>

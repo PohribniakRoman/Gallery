@@ -27,11 +27,13 @@ export const PhotoPreloader:React.FC<PhotoPreloader> = ({Element}) => {
     const [loadedPrecent,setLoadedPrecent] = useState<number>(0);
     const galeryPhotos = useRef<null>(null)
     return <>
-    {loadedPrecent !== galery.length?
+    {loadedPrecent !== galery.length+1?
         <section ref={galeryPhotos} className="loader preloader">
+        <img className="none" onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={photo6}/>
         {galery.map(img=>{
             return <img key={img} className="none" onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={img}/>
         })}
+
         <p>
             {Math.round((loadedPrecent/galery.length)*100)}%
         </p>
