@@ -20,7 +20,7 @@ export const Banner:React.FC = () => {
                 setIndex(slideIndex-1)
             }}}/>
         {new Array(gallerySize).fill(gallerySize).map((el,index)=>{
-            return <BannerSection key={index} isHidden={index+1 !== slideIndex} side={index+1>slideIndex?"right":"left"} bgIndex={index}/>
+            return <BannerSection key={el+index} isHidden={index+1 !== slideIndex} side={index+1>slideIndex?"right":"left"} bgIndex={index}/>
         })}
 
         <BannerCounter current={slideIndex} max={gallerySize}/>
