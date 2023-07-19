@@ -17,7 +17,7 @@ import slider7 from "../../assets/slider/7.jpg";
 import photo10 from "../../assets/loader/10.jpg";
 import photo11 from "../../assets/loader/11.jpg";
 import photo12 from "../../assets/loader/12.jpg";
-import { useState,useRef } from "react";
+import { useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { State } from "../../reducers/combinedReducer";
 
