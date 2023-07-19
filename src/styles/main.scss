@@ -5,7 +5,27 @@
 @import "abstracts/mixins";
 
 @import "components/loader";
+@import "components/banner";
+@import "components/navbar";
 
 .none{
     display: none;
+}
+
+.showUp{
+    animation-name: showUp;
+    animation-duration: $showUp-timing;
+    animation-iteration-count: 1;
+}
+
+@keyframes showUp {
+    0%{
+        transform: translateY(100%);
+    }
+    50%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateY(0);
+    }
 }

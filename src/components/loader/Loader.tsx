@@ -1,11 +1,8 @@
 import { LoaderColumn } from "./LoaderColumn"
 
-export interface Loader{
-    galery:HTMLDivElement|null
-} 
 
 
-export const Loader:React.FC<Loader> = ({}) =>{ 
+export const Loader:React.FC = () =>{ 
     return <section className="loader">
         <LoaderColumn variant="reverse" galeryIndex={1} />
         <LoaderColumn galeryIndex={2}/>

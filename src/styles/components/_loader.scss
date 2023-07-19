@@ -1,6 +1,6 @@
 .loader {
-  height: 100vh;
   background: $background-color;
+  @include fullsize;
   @include flex-container;
   position: relative;
   overflow: hidden;
@@ -10,7 +10,7 @@
     animation-name: marginGrow;
     animation-duration: 5s;
     animation-iteration-count: 1;
-    &.straight .loader__floating--wrapper{
+    &.straight .loader__floating--wrapper {
       animation-name: slideInFromTop;
       &:nth-child(1) {
         animation-duration: 4s;
@@ -54,122 +54,118 @@
   }
   &__floating {
     &--item {
-        width: 500px;
-        height: 250px;
-        object-fit: cover;
-        &.main {
-          animation-name: grow;
-          animation-duration: 5s;
-          animation-iteration-count: 1;
-          width: 102vmax;
-          height: 102vmin;
-        }
-        &.sideMainTop{
-            animation-name: sideItemGrowTop;
-            animation-duration: 5s;
-            animation-iteration-count: 1;
-            width: 100vmax;
-            height: 100vmin;
-            translate:0 -150%;
-        }
-        &.sideUpperTopSlide{
-            animation-name:sideUpperTopSlide;            
-            animation-duration: 5s;
-            animation-iteration-count: 1;
-        }
-        &.sideMainBottom{
-            animation-name: sideItemGrowBottom;
-            animation-duration: 5s;
-            animation-iteration-count: 1;
-            width: 100vmax;
-            height: 100vmin;
-            translate:0 150%;
-        }
+      width: 500px;
+      height: 250px;
+      object-fit: cover;
+      &.main {
+        animation-name: grow;
+        animation-duration: 5s;
+        animation-iteration-count: 1;
+        @include fullsize;
+      }
+      &.sideMainTop {
+        animation-name: sideItemGrowTop;
+        animation-duration: 5s;
+        animation-iteration-count: 1;
+        @include fullsize;
+        translate: 0 -150%;
+      }
+      &.sideUpperTopSlide {
+        animation-name: sideUpperTopSlide;
+        animation-duration: 5s;
+        animation-iteration-count: 1;
+      }
+      &.sideMainBottom {
+        animation-name: sideItemGrowBottom;
+        animation-duration: 5s;
+        animation-iteration-count: 1;
+        @include fullsize;
+        translate: 0 150%;
+      }
     }
     &--wrapper {
       position: absolute;
       animation-iteration-count: 1;
-      &.center{
+      &.center {
         z-index: 1;
         left: 50%;
         translate: -50% 0;
-    }
+      }
     }
   }
 }
 
-@keyframes sideUpperTopSlide{
-    0%{
-        translate: 0 0;
-    }
-    60%{
-        translate: 0 0;
-    }
-    100%{
-        translate: 0 -100%;
-    }
+@keyframes sideUpperTopSlide {
+  0% {
+    translate: 0 0;
+  }
+  60% {
+    translate: 0 0;
+  }
+  100% {
+    translate: 0 -100%;
+  }
 }
-@keyframes sideItemGrowTop{
-    0%{
-        margin-bottom: 0px;
-        width: 500px;
-        height: 250px;
-    }
-    60%{
-        margin-bottom: 100px;
-        width: 500px;
-        height: 250px;
-        translate:0 0px;
-    }
-    100%{
-        width: 100vmax;
-        height: 100vmin;
-        margin-bottom: 400px;
-        translate: 0 -1200px;
-    }
+@keyframes sideItemGrowTop {
+  0% {
+    margin-bottom: 0px;
+    width: 500px;
+    height: 250px;
+  }
+  60% {
+    margin-bottom: 100px;
+    width: 500px;
+    height: 250px;
+    translate: 0 0px;
+  }
+  100% {
+    @include fullsize;
+    margin-bottom: 400px;
+    translate: 0 -1200px;
+  }
 }
-@keyframes sideItemGrowBottom{
-    0%{
-        width: 500px;
-        height: 250px;
-    }
-    60%{
-        width: 500px;
-        height: 250px;
-        translate:0 0px;
-    }
-    100%{
-        width: 100vmax;
-        height: 100vmin;
-        translate: 0 450px;
-    }
+@keyframes sideItemGrowBottom {
+  0% {
+    width: 500px;
+    height: 250px;
+  }
+  60% {
+    width: 500px;
+    height: 250px;
+    translate: 0 0px;
+  }
+  100% {
+    width: 100vw;
+    @include fullsize;
+    translate: 0 450px;
+  }
 }
 
-@keyframes marginGrow{
-    0%{
-        margin: 0px;
-    }
-    60%{
-        margin: 40px;
-    }
-    100%{
-        margin: 400px;
-    }
+@keyframes marginGrow {
+  0% {
+    margin: 0px;
+  }
+  60% {
+    margin: 40px;
+  }
+  100% {
+    margin: 400px;
+  }
 }
 @keyframes grow {
-    0% {
-        width: 500px;
-        height: 250px;
-        margin: 0px;
-    }
-    60% {
-      margin: 0px;
-      width: 500px;
-      height: 250px;
-    }
-    100% {
-    width: 102vmax;
-    height: 102vmin;
+  0% {
+    width: 500px;
+    height: 250px;
+    margin: 0px;
+  }
+  60% {
+    margin: 0px;
+    width: 500px;
+    height: 250px;
+  }
+  100% {
+    width: 100vw;
+    @include fullsize;
   }
 }
 
@@ -183,8 +179,9 @@
     top: -500%;
   }
 }
-
-.preloader{
-    font-size: 32px;
-    color: #fff;
+.preloader {
+  font-size: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  color: #fff;
 }

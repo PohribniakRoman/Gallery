@@ -7,11 +7,20 @@ import photo6 from "../../assets/loader/6.jpg";
 import photo7 from "../../assets/loader/7.jpg";
 import photo8 from "../../assets/loader/8.jpg";
 import photo9 from "../../assets/loader/9.jpg";
+import slider1 from "../../assets/slider/1.jpg";
+import slider2 from "../../assets/slider/2.jpg";
+import slider3 from "../../assets/slider/3.jpg";
+import slider4 from "../../assets/slider/4.jpg";
+import slider5 from "../../assets/slider/5.jpg";
+import slider6 from "../../assets/slider/6.jpg";
+import slider7 from "../../assets/slider/7.jpg";
 import photo10 from "../../assets/loader/10.jpg";
 import photo11 from "../../assets/loader/11.jpg";
 import photo12 from "../../assets/loader/12.jpg";
 import { useState,useRef } from "react";
-import { Loader } from "./Loader";
+import { useDispatch,useSelector } from "react-redux";
+import { State } from "../../reducers/combinedReducer";
+
 
 export const galery = [
     photo1,photo2,photo3,photo4,
@@ -19,24 +28,30 @@ export const galery = [
     photo5,photo7,photo6,photo9
 ]
 
-export interface PhotoPreloader{
-    Element:React.FC<Loader>
-}
+export const slider = [
+    photo6,slider1,slider2,slider3,slider4,slider5,slider6,slider7
+]
 
-export const PhotoPreloader:React.FC<PhotoPreloader> = ({Element}) => {
+export const PhotoPreloader:React.FC = () => {
     const [loadedPrecent,setLoadedPrecent] = useState<number>(0);
+    const preloaderState = useSelector((state:State)=>state.loader);
     const galeryPhotos = useRef<null>(null)
-    return <>
-    {loadedPrecent !== galery.length+1?
-        <section ref={galeryPhotos} className="loader preloader">
-        <img className="none" onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={photo6}/>
+    const dispatch = useDispatch();
+    if(loadedPrecent === galery.length+slider.length && !preloaderState.loaded){
+        setTimeout(()=>{
+            dispatch({type:"SET_LOADING",payload:true});
+        },5000)
+    }
+    
+    return <section ref={galeryPhotos} className="loader preloader">
         {galery.map(img=>{
-            return <img key={img} className="none" onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={img}/>
+            return <img key={img} width={300} height={300} onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={img}/>
         })}
-
+        {slider.map(img=>{
+            return <img key={img} width={300} height={300} onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={img}/>
+        })}
         <p>
             {Math.round((loadedPrecent/galery.length)*100)}%
         </p>
-    </section>:<Element galery={galeryPhotos.current}/>}
-    </>
+    </section>
 }

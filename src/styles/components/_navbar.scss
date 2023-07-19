@@ -1,0 +1,24 @@
+.navbar{
+    @include flex-container;   
+    overflow:hidden;
+    &__item{
+        height: 100px;
+        @include flex-container;
+        z-index: 1;
+        width: 90px;
+        user-select: none;
+        & p{
+            opacity: 0.3;
+            cursor: pointer;
+            transition: .3s;
+            color: #fff;
+        }
+        &.active p{
+            cursor: context-menu;
+            opacity: 1;
+        }
+        & p:hover{
+            opacity: 1;
+        }
+    }
+}

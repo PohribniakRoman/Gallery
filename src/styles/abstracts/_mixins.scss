@@ -3,8 +3,25 @@
     align-items: center;
     justify-content: center;
 }
+@mixin fullsize{
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+}
+
+@mixin absolute-fullsize{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+}
+
 @mixin pseudo-element{
     content: '';
     position: absolute;
 }
 
+@mixin bacgkround-image{
+    background-position: center;
+    background-size: cover;
+}
