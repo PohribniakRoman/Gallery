@@ -1,5 +1,4 @@
 import { AiOutlinePlus } from "react-icons/ai";
-import {useState} from "react";
 
 export interface BannerControls{
     variant:"right"|"left",

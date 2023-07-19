@@ -35,15 +35,12 @@ export const slider = [
 export const PhotoPreloader:React.FC = () => {
     const [loadedPrecent,setLoadedPrecent] = useState<number>(0);
     const preloaderState = useSelector((state:State)=>state.loader);
-    const galeryPhotos = useRef<null>(null)
     const dispatch = useDispatch();
     if(loadedPrecent === galery.length+slider.length && !preloaderState.loaded){
-        setTimeout(()=>{
-            dispatch({type:"SET_LOADING",payload:true});
-        },5000)
+        dispatch({type:"SET_LOADING",payload:true});
     }
     
-    return <section ref={galeryPhotos} className="loader preloader">
+    return <section className="loader preloader">
         {galery.map(img=>{
             return <img key={img} width={300} height={300} onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={img}/>
         })}

@@ -184,4 +184,8 @@
   display: flex;
   flex-wrap: wrap;
   color: #fff;
+  & img{
+    position: absolute;
+    opacity: 0;
+  }
 }
