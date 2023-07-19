@@ -48,7 +48,7 @@ export const PhotoPreloader:React.FC = () => {
             return <img key={img} width={300} height={300} onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={img}/>
         })}
         <p>
-            {Math.round((loadedPrecent/galery.length)*100)}%
+            {Math.round((loadedPrecent/(galery.length + slider.length))*100)}%
         </p>
     </section>
 }
