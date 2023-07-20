@@ -17,7 +17,7 @@ import slider7 from "../../assets/slider/7.jpg";
 import photo10 from "../../assets/loader/10.jpg";
 import photo11 from "../../assets/loader/11.jpg";
 import photo12 from "../../assets/loader/12.jpg";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { State } from "../../reducers/combinedReducer";
 
@@ -36,9 +36,11 @@ export const PhotoPreloader:React.FC = () => {
     const [loadedPrecent,setLoadedPrecent] = useState<number>(0);
     const preloaderState = useSelector((state:State)=>state.loader);
     const dispatch = useDispatch();
-    if(loadedPrecent === galery.length+slider.length && !preloaderState.loaded){
-        dispatch({type:"SET_LOADING",payload:true});
-    }
+    useEffect(()=>{
+        if(loadedPrecent === galery.length+slider.length && !preloaderState.loaded){
+            dispatch({type:"SET_LOADING",payload:true});
+        }
+    },[loadedPrecent])
     
     return <section className="loader preloader">
         {galery.map(img=>{
