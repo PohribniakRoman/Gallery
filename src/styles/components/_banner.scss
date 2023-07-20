@@ -7,52 +7,57 @@
     position: relative;
     &--background{
         &-wrapper{
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            @include absolute-fullsize;
             z-index: -1;
+            &::after{
+                animation-name:getDark;
+                animation-duration: $background-show-timing;
+                animation-iteration-count: 1;
+                @include pseudo-element;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                background-color: rgba($color: #000000, $alpha: 0.40);
+            }
         }
         &-img{
+            z-index: -1;
             user-select: none;
             width: 100%;
             height: 100%;
+            object-position: center;
             object-fit: cover;
         }
     }
     &--section{
-        position: relative;
-        &::after{
-            animation-name:getDark;
-            animation-duration: $background-show-timing;
-            animation-iteration-count: 1;
-            @include pseudo-element;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            background-color: rgba($color: #000000, $alpha: 0.40);
-        }
         @include absolute-fullsize;
         @include bacgkround-image;
         @include flex-container;
-        z-index: -1;
         transition: 1s;
-        transform: translateX(0);
+        right: 0;
+        left: 0;
         &.hidden{
             overflow: hidden;
             z-index: 1;
+            width: 0vw;
+            * h1{
+                display: none;
+            }
             &.right{
-                transform: translateX(100%);
-                * .banner--section-container{
-                    display: none;
-                }
+                animation-name: slideRight;
+                animation-duration: 1s;
+                animation-iteration-count: 1;
+                width: 0;
+                left: 100%;                
             }
             &.left{
-                transform: translateX(-100%);
-                * .banner--section-container{
-                    display: none;
-                }
+                animation-name: slideLeft;
+                animation-duration: 1s;
+                animation-iteration-count: 1;
+                width: 0;
+                right: 100%;
             }
         }
         &-container{
@@ -121,5 +126,26 @@
     }
     100%{
         background-color: rgba($color: #000000, $alpha: 0.40);
+    }
+}
+
+@keyframes slideLeft {
+    0%{
+        @include fullsize;
+        right: 50%;
+    }
+    100%{
+        width: 0;
+        right: 100%;
+    }
+}
+@keyframes slideRight {
+    0%{
+        @include fullsize;
+        left: 0%;
+    }
+    100%{
+        width: 0;
+        left: 100%;
     }
 }
