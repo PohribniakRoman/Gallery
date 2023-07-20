@@ -5,39 +5,106 @@ import { BannerControls } from "./BannerControls";
 import { BannerSection } from "./BannerSection";
 
 
+export interface galleryState{
+    variant:"carousel"|"fullsize";
+    index:number;
+    withAnimation:boolean;
+}
+interface carouselState{
+    translated:number;
+}
+
 export const Banner:React.FC = () => {
-    const [slideIndex,setIndex] = useState<number>(1);
-    const [galleryState,setGalleryState] = useState<"carousel"|"fullsize">("fullsize");    
+    const [galleryState,setGalleryState] = useState<galleryState>({variant:"fullsize",index:1,withAnimation:false});    
     const gallerySize = 8;
     const carousel = useRef<null|HTMLDivElement>(null)
+    const [carouselState,setCarouselState] = useState<carouselState>({translated:0})
+    const wheelhandler = () =>{
+        setGalleryState({...galleryState,variant:"carousel",withAnimation:true});
+    }
+
+    const handleMouseMove = (event:MouseEvent) =>{
+        const container = carousel.current;
+        if(container){
+            if(container.dataset.mouseDownAt === "0") return;
+
+            const mouseDelta = parseFloat(container.dataset.mouseDownAt as string) - event.clientX,
+                  maxDelta = window.innerWidth / 2;
+            
+            const percentage = (mouseDelta / maxDelta) * -100,
+                nextPercentageUnconstrained = parseFloat(container.dataset.prevPercentage as string) + percentage,
+                nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
+
+            container.dataset.percentage = nextPercentage+"";
+            console.log(nextPercentage);
+            
+            container.animate({
+                transform: `translate(${nextPercentage}%, -25vh)`
+              }, { duration: 1200, fill: "forwards" });
+            setCarouselState({translated:-nextPercentage})
+        }
+    }
+
+    const handleMouseDown = (event:React.MouseEvent) => {
+        const container = carousel.current;
+        if(container){
+            container.dataset.mouseDownAt = event.clientX+"";
+            container.addEventListener("mousemove",handleMouseMove)
+        }
+    }
+
+    const handleMouseUp = () => {
+        const container = carousel.current;
+        
+        if(container){
+            container.dataset.mouseDownAt = "0";
+            container.dataset.prevPercentage = container.dataset.percentage;
+            container.removeEventListener("mousemove",handleMouseMove)
+        }
+    }
 
     useEffect(()=>{
-        if(carousel.current){
-            window.addEventListener("wheel",()=>{
-                setGalleryState("carousel");
-            })
+        if(carousel.current && !galleryState.withAnimation){
+            window.addEventListener("wheel",wheelhandler)
+        }else{
+            window.removeEventListener("wheel",wheelhandler)
         }
-    },[])
+    },[galleryState])
 
-
+    window.addEventListener("mouseup",handleMouseUp);
 
     return <section className="banner">
         <Navbar/>
-        <BannerControls max={gallerySize} variant="left"  onClick={()=>{
-            if(slideIndex<8){
-                setIndex(slideIndex+1)
-
-            }}}/>
-        <BannerControls max={gallerySize} variant="right" onClick={()=>{
-            if(slideIndex>1){
-                setIndex(slideIndex-1)
-            }}}/>
-        <div ref={carousel} className={`carousel--container ${galleryState === "carousel"?"active":"inactive"}`}>
+        {galleryState.variant === "carousel"?<></>:<>
+            <BannerControls max={gallerySize} variant="left"  onClick={()=>{
+                if(galleryState.index<8){
+                    setGalleryState({...galleryState,index:galleryState.index+1});
+                }}}/>
+            <BannerControls max={gallerySize} variant="right" onClick={()=>{
+                if(galleryState.index>1){
+                    setGalleryState({...galleryState,index:galleryState.index-1});
+                }}}/>
+        </>}
+        <div 
+            ref={carousel} 
+            data-mouse-down-at="0"
+            data-prev-percentage="0"
+            style={{transform:`translate(${(galleryState.index/gallerySize)*100},-25vh)`}}
+            className={`carousel--container ${galleryState.variant === "carousel"?"active":"inactive"}`}
+            onMouseDown={handleMouseDown}>
             {new Array(gallerySize).fill(gallerySize).map((el,index)=>{
-                return <BannerSection galleryState={galleryState} setGalleryState={setGalleryState}  key={el+index} isHidden={index+1 !== slideIndex} side={index+1>slideIndex?"right":"left"} bgIndex={index}/>
+                return <BannerSection 
+                            key={el+index}            
+                            translated={carouselState.translated} 
+                            galleryState={galleryState} 
+                            setGalleryState={setGalleryState}
+                            isHidden={index+1 !== galleryState.index}
+                            side={index+1>galleryState.index?"right":"left"}
+                            bgIndex={index}/>
             })}
+            <div className="banner--shadow"/>
         </div>
 
-        <BannerCounter current={slideIndex} max={gallerySize}/>
+        <BannerCounter current={galleryState.index} max={gallerySize}/>
     </section>
 } 

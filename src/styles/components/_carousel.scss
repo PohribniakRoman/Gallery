@@ -1,14 +1,24 @@
 .carousel{
     &--container{
+        @include absolute-fullsize;
+        display: flex;
+        left: 0;
+        top: 0;
         &.inactive{
-            @include absolute-fullsize;
+            transform: translate(0,0) !important;
         }
         &.active{
-            display: flex;
+            width: auto;
+            height: 50vh;
             left: 50%;
             top: 50%;
             transform: translate(-$carousel-card-sizeX/2,-$carousel-card-sizeY/2);
-            @include absolute-fullsize;
+            & .banner--shadow{
+                &::after{
+                    opacity: 0;
+                    z-index: -1;
+                }
+              }
         }
     }
 }

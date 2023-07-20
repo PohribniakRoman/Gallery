@@ -1,26 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { slider } from "../loader/PhotoPreloader"
+import { galleryState } from "./Banner";
 
 export interface BannerSection{
     bgIndex:number;
     isHidden:boolean;
     side?:"right"|"left";
-    galleryState:"carousel"|"fullsize";
+    galleryState:galleryState;
     setGalleryState:Function;
+    translated:number;
 }
 
-export const BannerSection:React.FC<BannerSection> = ({bgIndex,galleryState,isHidden,side = "left"}) => {
-    const [loaded,setLoaded] = useState<boolean>(false);
+export const BannerSection:React.FC<BannerSection> = ({translated,setGalleryState,bgIndex,galleryState,isHidden,side = "left"}) => {
     useEffect(()=>{
-        if(!loaded){
-            setTimeout(()=>setLoaded(true),1000);
+        if(!galleryState.withAnimation){
+            setTimeout(()=>setGalleryState({...galleryState,withAnimation:true}),1000);
         }
-    },[])
+    },[galleryState])
     
-    return  <section className={`banner--section ${galleryState} ${isHidden?`hidden ${side} ${loaded?"":"none-visibility"}`:""}`}>
-        <div className="banner--background-wrapper">
-            <img src={slider[bgIndex]} className="banner--background-img"/>
-        </div>
+    return  <section 
+                className={`banner--section ${galleryState.variant} ${isHidden?`hidden ${side} ${galleryState.withAnimation?"":"none-visibility"}`:""}`} 
+                onClick={()=>{
+                    if(galleryState.variant==="carousel"){
+                        setGalleryState({variant:"fullsize",index:bgIndex+1,withAnimation:false});
+                    }
+                }}
+              >
+            <img draggable={false} style={{objectPosition:`${translated}% center`}} src={slider[bgIndex]} className="banner--background-img"/>
         <div className="banner--section-container">
             <h1 className="banner--section-title showUp">Front-end Developer</h1>
         </div>

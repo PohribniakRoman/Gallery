@@ -1,72 +1,64 @@
 .banner {
-    background-color: $background-color;
   @include fullsize;
   @include flex-container;
   overflow: hidden;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  &--background {
-    &-wrapper {
-      @include absolute-fullsize;
-      z-index: -1;
-      transition: 1s;
-      &::after {
-        transition: 1s;
-        animation-name: getDark;
-        animation-duration: $background-show-timing;
-        animation-iteration-count: 1;
-        @include pseudo-element;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        background-color: rgba($color: #000000, $alpha: 0.4);
-      }
+  &--shadow {
+    &::after {
+      @include pseudo-element;
+      @include fullsize;
+      animation-name: getDark;
+      animation-duration: $background-show-timing;
+      animation-iteration-count: 1;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      background-color: rgba($color: #000000, $alpha: 0.4);
     }
-    &-img {
-      z-index: -1;
-      user-select: none;
-      width: 100%;
-      height: 100%;
-      object-position: center;
-      object-fit: cover;
-    }
+  }
+  &-img {
+    transition: 1s;
+    @include absolute-fullsize;
+    object-fit: cover;
+    left: 0;
+    top: 0;
+    object-position: 50% center;
   }
   &--section {
     @include absolute-fullsize;
     @include bacgkround-image;
     @include flex-container;
-    transition: 1s;
     right: 0;
     left: 0;
     &.carousel:not(:last-child) {
       margin-right: 50px;
     }
     &.carousel {
+      cursor: pointer;
       min-width: $carousel-card-sizeX;
+      width: $carousel-card-sizeX;
       height: $carousel-card-sizeY;
       position: relative;
+      overflow: hidden;
+      &.hidden.right{
+        left: 0;
+      }
+      &.hidden.left{
+        left: 0;
+      }
       & .banner--background-img {
         object-position: 0% center;
+        object-fit: cover;
         width: 100%;
         height: 100%;
-    }
-    & .banner--background-wrapper {
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        &::after {
-          background-color: rgba($color: #000000, $alpha: 0);
-        }
       }
-      & .banner--section-container {
+      & div {
         display: none;
       }
     }
-    &.fullsize.hidden {
+    &.hidden {
       overflow: hidden;
       z-index: 1;
       width: 0vw;
@@ -90,7 +82,7 @@
     }
     &-container {
       position: absolute;
-      z-index: 1;
+      z-index: 3;
       top: 50%;
       @include flex-container;
       transform: translateY(-50%);
@@ -179,4 +171,8 @@
 }
 .none-visibility {
   opacity: 0;
+}
+* img{
+    user-select: none !important;
+    
 }
