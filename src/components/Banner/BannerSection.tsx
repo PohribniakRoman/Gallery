@@ -14,7 +14,7 @@ export interface BannerSection{
 export const BannerSection:React.FC<BannerSection> = ({translated,setGalleryState,bgIndex,galleryState,isHidden,side = "left"}) => {
     useEffect(()=>{
         if(!galleryState.withAnimation){
-            setTimeout(()=>setGalleryState({...galleryState,withAnimation:true}),1000);
+            setTimeout(()=>setGalleryState((prev:galleryState)=>{return{...prev,withAnimation:true}}),1000);
         }
     },[galleryState])
     
