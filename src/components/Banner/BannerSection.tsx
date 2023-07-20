@@ -5,9 +5,11 @@ export interface BannerSection{
     bgIndex:number;
     isHidden:boolean;
     side?:"right"|"left";
+    galleryState:"carousel"|"fullsize";
+    setGalleryState:Function;
 }
 
-export const BannerSection:React.FC<BannerSection> = ({bgIndex,isHidden,side = "left"}) => {
+export const BannerSection:React.FC<BannerSection> = ({bgIndex,galleryState,isHidden,side = "left"}) => {
     const [loaded,setLoaded] = useState<boolean>(false);
     useEffect(()=>{
         if(!loaded){
@@ -15,7 +17,7 @@ export const BannerSection:React.FC<BannerSection> = ({bgIndex,isHidden,side = "
         }
     },[])
     
-    return  <section className={`banner--section ${isHidden?`hidden ${side} ${loaded?"":"none-visibility"}`:""}`}>
+    return  <section className={`banner--section ${galleryState} ${isHidden?`hidden ${side} ${loaded?"":"none-visibility"}`:""}`}>
         <div className="banner--background-wrapper">
             <img src={slider[bgIndex]} className="banner--background-img"/>
         </div>

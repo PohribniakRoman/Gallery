@@ -6,6 +6,7 @@
 
 @import "components/loader";
 @import "components/banner";
+@import "components/carousel";
 @import "components/navbar";
 
 .none{
@@ -28,4 +29,7 @@
     100%{
         transform: translateY(0);
     }
+}
+body{
+    background: $background-color;
 }

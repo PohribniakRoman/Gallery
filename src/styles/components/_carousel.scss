@@ -1,0 +1,14 @@
+.carousel{
+    &--container{
+        &.inactive{
+            @include absolute-fullsize;
+        }
+        &.active{
+            display: flex;
+            left: 50%;
+            top: 50%;
+            transform: translate(-$carousel-card-sizeX/2,-$carousel-card-sizeY/2);
+            @include absolute-fullsize;
+        }
+    }
+}
