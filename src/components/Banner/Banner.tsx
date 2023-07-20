@@ -29,18 +29,13 @@ export const Banner:React.FC = () => {
             if(container.dataset.mouseDownAt === "0") return;
 
             const mouseDelta = parseFloat(container.dataset.mouseDownAt as string) - event.clientX,
-                  maxDelta = window.innerWidth / 2;
+                  maxDelta = container.offsetWidth;
             
             const percentage = (mouseDelta / maxDelta) * -100,
                 nextPercentageUnconstrained = parseFloat(container.dataset.prevPercentage as string) + percentage,
                 nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
 
             container.dataset.percentage = nextPercentage+"";
-            console.log(nextPercentage);
-            
-            container.animate({
-                transform: `translate(${nextPercentage}%, -25vh)`
-              }, { duration: 1200, fill: "forwards" });
             setCarouselState({translated:-nextPercentage})
         }
     }
@@ -87,11 +82,13 @@ export const Banner:React.FC = () => {
         </>}
         <div 
             ref={carousel} 
+            data-percentage="0"
             data-mouse-down-at="0"
             data-prev-percentage="0"
-            style={{transform:`translate(${(galleryState.index/gallerySize)*100},-25vh)`}}
+            style={{transform:`translate(-${carouselState.translated}%,-25vh)`}}
             className={`carousel--container ${galleryState.variant === "carousel"?"active":"inactive"}`}
-            onMouseDown={handleMouseDown}>
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}>
             {new Array(gallerySize).fill(gallerySize).map((el,index)=>{
                 return <BannerSection 
                             key={el+index}            
