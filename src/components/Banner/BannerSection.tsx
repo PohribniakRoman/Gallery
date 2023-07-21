@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { slider } from "../loader/PhotoPreloader"
 import { galleryState } from "./Banner";
 
@@ -11,7 +11,13 @@ export interface BannerSection{
     translated:number;
 }
 
+interface cursorPosition{
+    x:number;
+    y:number;
+}
+
 export const BannerSection:React.FC<BannerSection> = ({translated,setGalleryState,bgIndex,galleryState,isHidden,side = "left"}) => {
+    const [cursorPosition,setCursorPosition]=useState<cursorPosition>({x:-1,y:-1})
     useEffect(()=>{
         if(!galleryState.withAnimation){
             setTimeout(()=>setGalleryState((prev:galleryState)=>{return{...prev,withAnimation:true}}),1000);
@@ -20,9 +26,14 @@ export const BannerSection:React.FC<BannerSection> = ({translated,setGalleryStat
     
     return  <section 
                 className={`banner--section ${galleryState.variant} ${isHidden?`hidden ${side} ${galleryState.withAnimation?"":"none-visibility"}`:""}`} 
-                onClick={()=>{
-                    if(galleryState.variant==="carousel"){
+                onMouseDown={(event:MouseEvent)=>{
+                    setCursorPosition({x:event.clientX,y:event.clientY});
+                }}
+                onMouseUp={(event:MouseEvent)=>{
+                    if(galleryState.variant==="carousel" && cursorPosition.x === event.clientX && cursorPosition.y === event.clientY){
                         setGalleryState({variant:"fullsize",index:bgIndex+1,withAnimation:false});
+                    }else{
+                        setCursorPosition({x:-1,y:-1});
                     }
                 }}
               >

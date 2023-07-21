@@ -3,6 +3,7 @@
         @include absolute-fullsize;
         display: flex;
         left: 0;
+        transition: .1s transform;
         top: 0;
         &.inactive{
             transform: translate(0,0) !important;
