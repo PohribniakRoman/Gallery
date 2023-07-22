@@ -25,7 +25,7 @@ export const BannerSection:React.FC<BannerSection> = ({translated,setGalleryStat
     },[galleryState])
     
     return  <section 
-                className={`banner--section ${galleryState.variant} ${isHidden?`hidden ${side} ${galleryState.withAnimation?"":"none-visibility"}`:""}`} 
+                className={`banner--section ${galleryState.variant} ${galleryState.variant==="carousel"?"":"transition"} ${isHidden?`hidden ${side} ${galleryState.withAnimation?"":"none-visibility"}`:""}`} 
                 onMouseDown={(event:MouseEvent)=>{
                     setCursorPosition({x:event.clientX,y:event.clientY});
                 }}

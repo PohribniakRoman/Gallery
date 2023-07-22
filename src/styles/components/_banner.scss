@@ -19,7 +19,6 @@
     }
   }
   &-img {
-    transition: 1s;
     @include absolute-fullsize;
     object-fit: cover;
     left: 0;
@@ -27,12 +26,14 @@
     object-position: 50% center;
   }
   &--section {
-    transition: 1s;
     @include absolute-fullsize;
     @include bacgkround-image;
     @include flex-container;
     right: 0;
     left: 0;
+    &.transition{
+      transition: 1s;
+    }
     &.carousel:not(:last-child) {
       margin-right: 50px;
     }
