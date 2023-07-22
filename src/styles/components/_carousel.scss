@@ -1,4 +1,17 @@
 .carousel{
+    &--cross{
+        @include flex-container;
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #fff;
+        cursor: pointer;
+        & svg {
+          transition: 1s;
+          font-size: 30px;
+        }
+    }
     &--container{
         @include absolute-fullsize;
         display: flex;

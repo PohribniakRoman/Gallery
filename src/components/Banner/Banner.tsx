@@ -3,6 +3,7 @@ import { Navbar } from "../Navbar";
 import { BannerCounter } from "./BannerCounter";
 import { BannerControls } from "./BannerControls";
 import { BannerSection } from "./BannerSection";
+import { AiOutlinePlus } from "react-icons/ai";
 
 
 export interface galleryState{
@@ -12,13 +13,16 @@ export interface galleryState{
 }
 interface carouselState{
     translated:number;
+    index:number;
 }
 
 export const Banner:React.FC = () => {
     const [galleryState,setGalleryState] = useState<galleryState>({variant:"fullsize",index:1,withAnimation:false});    
     const gallerySize = 8;
     const carousel = useRef<null|HTMLDivElement>(null)
-    const [carouselState,setCarouselState] = useState<carouselState>({translated:0})
+    const [carouselState,setCarouselState] = useState<carouselState>({translated:0,index:galleryState.index})
+    console.log(carouselState.index);
+    
     const wheelhandler = () =>{
         setGalleryState({...galleryState,variant:"carousel",withAnimation:true});
     }
@@ -36,7 +40,7 @@ export const Banner:React.FC = () => {
                 nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
 
             container.dataset.percentage = nextPercentage+"";
-            setCarouselState({translated:-nextPercentage})
+            setCarouselState({translated:-nextPercentage,index:Math.min(Math.floor((nextPercentage+(100/-gallerySize))/(100/-gallerySize)),gallerySize)})
         }
     }
 
@@ -70,7 +74,11 @@ export const Banner:React.FC = () => {
 
     return <section className="banner">
         <Navbar/>
-        {galleryState.variant === "carousel"?<></>:<>
+        {galleryState.variant === "carousel"?<>
+            <div className="carousel--cross">
+                <AiOutlinePlus/>
+            </div>
+        </>:<>
             <BannerControls max={gallerySize} variant="left"  onClick={()=>{
                 if(galleryState.index<8){
                     setGalleryState({...galleryState,index:galleryState.index+1});
@@ -101,7 +109,10 @@ export const Banner:React.FC = () => {
             })}
             <div className="banner--shadow"/>
         </div>
-
-        <BannerCounter current={galleryState.index} max={gallerySize}/>
+        {
+            galleryState.variant === "carousel"
+            ?<BannerCounter current={carouselState.index} max={gallerySize}/>
+            :<BannerCounter current={galleryState.index} max={gallerySize}/>
+        }
     </section>
 } 

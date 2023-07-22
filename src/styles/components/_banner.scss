@@ -27,6 +27,7 @@
     object-position: 50% center;
   }
   &--section {
+    transition: 1s;
     @include absolute-fullsize;
     @include bacgkround-image;
     @include flex-container;
@@ -36,7 +37,6 @@
       margin-right: 50px;
     }
     &.carousel {
-      cursor: pointer;
       min-width: $carousel-card-sizeX;
       width: $carousel-card-sizeX;
       height: $carousel-card-sizeY;
