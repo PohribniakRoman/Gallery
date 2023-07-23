@@ -54,8 +54,8 @@
   }
   &__floating {
     &--item {
-      width: 500px;
-      height: 250px;
+      width: $start-sizeX;
+      height: $start-sizeY;
       object-fit: cover;
       &.main {
         animation-name: grow;
@@ -108,36 +108,36 @@
 }
 @keyframes sideItemGrowTop {
   0% {
-    margin-bottom: 0px;
-    width: 500px;
-    height: 250px;
+    margin-bottom: 0vw;
+    width: $start-sizeX;
+    height: $start-sizeY;
   }
   60% {
-    margin-bottom: 100px;
-    width: 500px;
-    height: 250px;
-    translate: 0 0px;
+    margin-bottom: 5vw;
+    width: $start-sizeX;
+    height: $start-sizeY;
+    translate: 0 0vw;
   }
   100% {
     @include fullsize;
-    margin-bottom: 400px;
-    translate: 0 -1200px;
+    margin-bottom: 20vw;
+    translate: 0 -120vh;
   }
 }
 @keyframes sideItemGrowBottom {
   0% {
-    width: 500px;
-    height: 250px;
+    width: $start-sizeX;
+    height: $start-sizeY;
   }
   60% {
-    width: 500px;
-    height: 250px;
-    translate: 0 0px;
+    width: $start-sizeX;
+    height: $start-sizeY;
+    translate: 0 0vw;
   }
   100% {
     width: 100vw;
     @include fullsize;
-    translate: 0 450px;
+    translate: 0 22.5vw;
   }
 }
 
@@ -146,22 +146,20 @@
     margin: 0px;
   }
   60% {
-    margin: 40px;
+    margin: 2vw;
   }
   100% {
-    margin: 400px;
+    margin: 20vw;
   }
 }
 @keyframes grow {
   0% {
-    width: 500px;
-    height: 250px;
-    margin: 0px;
+    width: $start-sizeX;
+    height: $start-sizeY;
   }
   60% {
-    margin: 0px;
-    width: 500px;
-    height: 250px;
+    width: $start-sizeX;
+    height: $start-sizeY;
   }
   100% {
     width: 100vw;

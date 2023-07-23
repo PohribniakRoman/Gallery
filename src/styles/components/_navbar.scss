@@ -1,9 +1,11 @@
 .navbar{
+    min-height: 100px;
+    height: 100px;
     @include flex-container;   
     overflow:hidden;
     z-index: 10;
     &__item{
-        height: 100px;
+        height: 100%;
         @include flex-container;
         z-index: 1;
         width: 90px;

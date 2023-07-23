@@ -1,4 +1,23 @@
 .carousel{
+    transition: 0.1s;
+    display: flex;
+    position: absolute;
+    user-select: none;
+    top: 50%;
+    left: 50%;
+    &.inactive{
+        z-index: 2;
+        top: 93%;
+        left: 78%;
+        transform:translate(-50%,-50%)!important;
+        & .carousel--item{
+            width: 5vw;
+            height: 10vh;
+            & img{
+                object-position: center !important;
+            }
+        }
+    }
     &--cross{
         @include flex-container;
         position: absolute;
@@ -8,31 +27,26 @@
         color: #fff;
         cursor: pointer;
         & svg {
-          transition: 1s;
-          font-size: 30px;
+            transition: 1s;
+            font-size: 30px;
         }
     }
-    &--container{
-        @include absolute-fullsize;
-        display: flex;
-        left: 0;
-        transition: .1s transform;
-        top: 0;
-        &.inactive{
-            transform: translate(0,0) !important;
+    &--item{
+        width: 22vw;
+        height: 50vh;
+        position: relative;
+        @include flex-container;
+        & img{
+            object-fit: cover;
+            width: 90%;
+            height: 100%;
         }
-        &.active{
-            width: auto;
-            height: 50vh;
-            left: 50%;
-            top: 50%;
-            transform: translate(-10vw,-25vh);
-            & .banner--shadow{
-                &::after{
-                    opacity: 0;
-                    z-index: -1;
-                }
-              }
+        &::before{
+            @include pseudo-element;
+            width: 90%;
+            height: 100%;
+            z-index: 1;
+            background-color: rgba($color: #000000, $alpha: 0.1);
         }
     }
 }
