@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useState } from "react"
 import { carouselState, gallerySize, galleryState } from "./Banner"
 import { slider } from "../loader/PhotoPreloader";
 
@@ -42,6 +42,7 @@ export const Carousel:React.FC<Carousel> = ({galleryState,setCarouselState,carou
         if(container){
             container.dataset.mouseDownAt = event.clientX+"";
             container.addEventListener("mousemove",handleMouseMove)
+            container.classList.add("grab")
         }
     }
     
@@ -52,24 +53,11 @@ export const Carousel:React.FC<Carousel> = ({galleryState,setCarouselState,carou
             container.dataset.mouseDownAt = "0";
             container.dataset.prevPercentage = container.dataset.percentage;
             container.removeEventListener("mousemove",handleMouseMove)
+            container.classList.remove("grab")
         }
     }
 
-    const wheelHandler = (e:WheelEvent) =>{
-        setCarouselState((prev:carouselState)=>{
-            const nextPercentage = Math.max(Math.min((-prev.translated)-e.deltaY/90, 100/-(gallerySize*2)), -100+(100/(gallerySize*2)));
-            const index = Math.min(Math.floor((nextPercentage+(100/-gallerySize))/(100/-gallerySize)),gallerySize);
-            return{translated:-nextPercentage,index}})
-        }
-        
         window.addEventListener("mouseup",handleMouseUp);
-        useEffect(()=>{
-        if(galleryState.variant === "carousel"){
-            window.addEventListener("wheel",wheelHandler);
-        }else{
-            window.removeEventListener("wheel",wheelHandler);
-        }
-    },[galleryState.variant])
 
 
     return <div 
@@ -88,7 +76,7 @@ export const Carousel:React.FC<Carousel> = ({galleryState,setCarouselState,carou
                 }}
                 onMouseUp={(event:React.MouseEvent)=>{
                     if(cursorPosition.x === event.clientX,cursorPosition.y === event.clientY){
-                        setGalleryState((prev:galleryState)=>{return{...prev,variant:"fullsize",index:i+1}})
+                        setGalleryState({variant:"fullsize",index:i+1,withAnimation:false})
                     }
                 }}
 >

@@ -7,6 +7,8 @@ import photo6 from "../../assets/loader/6.jpg";
 import photo7 from "../../assets/loader/7.jpg";
 import photo8 from "../../assets/loader/8.jpg";
 import photo9 from "../../assets/loader/9.jpg";
+import section1 from "../../assets/section/1.jpg";
+import section3 from "../../assets/section/3.jpg";
 import slider1 from "../../assets/slider/1.jpg";
 import slider2 from "../../assets/slider/2.jpg";
 import slider3 from "../../assets/slider/3.jpg";
@@ -32,12 +34,17 @@ export const slider = [
     photo6,slider1,slider2,slider3,slider4,slider5,slider6,slider7
 ]
 
+export const sectionGallery = [
+    section1,section3
+] 
+
+
 export const PhotoPreloader:React.FC = () => {
     const [loadedPrecent,setLoadedPrecent] = useState<number>(0);
     const preloaderState = useSelector((state:State)=>state.loader);
     const dispatch = useDispatch();
     useEffect(()=>{
-        if(loadedPrecent === galery.length+slider.length && !preloaderState.loaded){
+        if(loadedPrecent === galery.length+slider.length+sectionGallery.length && !preloaderState.loaded){
             dispatch({type:"SET_LOADING",payload:true});
         }
     },[loadedPrecent])
@@ -49,8 +56,11 @@ export const PhotoPreloader:React.FC = () => {
         {slider.map(img=>{
             return <img key={img} width={300} height={300} onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={img}/>
         })}
+        {sectionGallery.map(img=>{
+            return <img key={img} width={300} height={300} onLoad={()=>{setLoadedPrecent(prev=>prev+1)}} src={img}/>
+        })}
         <p>
-            {Math.round((loadedPrecent/(galery.length + slider.length))*100)}%
+            {Math.round((loadedPrecent/(galery.length + slider.length + sectionGallery.length))*100)}%
         </p>
     </section>
 }

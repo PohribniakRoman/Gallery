@@ -5,16 +5,28 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  transition: 1s;
+  &.outside{
+      animation-name: slideOut;
+      animation-duration: 1s;
+      animation-iteration-count: 1;
+      transform: translateY(-100%);
+      display: none;
+  }
   &--fullsize{
     @include absolute-fullsize;
     left: 0;
     top: 0;
+    transition: 1s;
     & img{
       object-fit: cover;
     }
     &.inactive{
       opacity: 0;
       z-index: -1;
+      & div{
+        display: none;
+      }
     }
     &::after {
       @include pseudo-element;
@@ -46,7 +58,7 @@
       overflow: hidden;
       z-index: 1;
       width: 0vw;
-      * h1 {
+      * h1,p {
         display: none;
       }
       &.right {
@@ -72,12 +84,27 @@
       transform: translateY(-50%);
       height: 70px;
       overflow: hidden;
+      color: #fff;
     }
     &-title {
       text-align: center;
       user-select: none;
+      padding-right: 25px;
       font-size: 64px;
-      color: #fff;
+      cursor: pointer;
+    }
+    &-id{
+      cursor: context-menu;
+      user-select: none;
+      right: 0;
+      top: 2px;
+      animation-name: getShown;
+      animation-duration: 1.5s;
+      animation-iteration-count: 1;
+      position: absolute;
+      margin-left: 10px;
+      font-size: 18px;
+
     }
   }
   &--index {
@@ -128,6 +155,18 @@
   }
 }
 
+@keyframes getShown {
+    0%{
+      opacity: 0;
+    }
+    67%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+}
+
 @keyframes getDark {
   0% {
     background-color: rgba($color: #000000, $alpha: 0);
@@ -159,8 +198,18 @@
 }
 .none-visibility {
   opacity: 0;
+  pointer-events: none;
 }
 * img{
     user-select: none !important;
-    
+}
+@keyframes slideOut {
+  0%{
+   transform: translateY(0%); 
+   display: block;
+  }
+  100%{
+    transform: translateY(-100%); 
+    display: block;
+  }
 }

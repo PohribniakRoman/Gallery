@@ -4,6 +4,7 @@ import { Loader } from "./components/loader/Loader";
 import { PhotoPreloader } from "./components/loader/PhotoPreloader";
 import {useSelector} from "react-redux";
 import { State } from "./reducers/combinedReducer";
+import { Section } from "./components/Section/Section";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
     <>{isLoading?
       <>
         <Banner/>
+        <Section/>
       </>:
       isPreloaded?
         <Loader/>:
