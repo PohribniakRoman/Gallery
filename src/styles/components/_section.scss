@@ -3,18 +3,18 @@
     z-index:1;
     top: 0;
     color: #fff;
-    position: relative;
     overflow-x: hidden;
     &::before{
         @include pseudo-element;
         @include fullsize;
         background-color: rgba($color: #000000, $alpha: 0.6);
         animation-name: getDark;
-        animation-duration: 1s;
+        animation-duration: 0.5s;
         animation-iteration-count: 1;
     }
     &.outside{
         height: 0;
+        z-index: -1;
     }
     &.slideIn{
         animation-name: slideIn;
