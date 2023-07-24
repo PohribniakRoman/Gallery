@@ -17,10 +17,10 @@ export interface sectionAction{
 export const sectionReducer = (state = defaultState, action: sectionAction) => {
     switch (action.type) {
         case "ENABLE_SECTION":{
-            return action.payload            
+            return {isActive:true,sectionId:action.payload}            
         };
         case "DISABLE_SECTION":{
-            return action.payload            
+            return {...state,isActive:false}            
         };
         default:{
             return state;

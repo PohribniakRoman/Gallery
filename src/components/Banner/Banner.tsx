@@ -33,6 +33,7 @@ export const Banner:React.FC = () => {
         if(isActive){
             window.removeEventListener("wheel",wheelhandler)
         }
+        setGalleryState({...galleryState,withAnimation:false})
     },[isActive])
 
 

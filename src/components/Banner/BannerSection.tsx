@@ -28,7 +28,7 @@ export const BannerSection:React.FC<BannerSection> = ({setGalleryState,bgIndex,g
             <img draggable={false} src={slider[bgIndex]} className="banner--background-img"/>
             <div className="banner--section-container">
                 <h1 className="banner--section-title showUp" onClick={()=>{
-                    dispatch({type:"ENABLE_SECTION",payload:{isActive:true,sectionId:content[bgIndex].id}})
+                    dispatch({type:"ENABLE_SECTION",payload:content[bgIndex].id})
                 }}>{content[bgIndex].bannerTitle}</h1>
                 <p className="banner--section-id"><Counter deley={4000} value={content[bgIndex].id}/></p>
             </div>
