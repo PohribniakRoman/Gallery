@@ -141,6 +141,7 @@
       justify-content: flex-start;
     }
     &-container {
+      user-select: none;
       position: absolute;
       bottom: 10px;
       @include flex-container;
