@@ -19,6 +19,12 @@
         transform: translate(-50%,-50%);
         background: radial-gradient(circle, rgba(255,255,255,0) 9%, rgba(20,20,20,0.5550595238095238) 45%, rgba(20,20,20,1) 90%);
     }
+    &.slideOut{
+        animation-name: slideToBottom;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+        display: none;
+    }
     &.outside{
         height: 0;
         z-index: -1;
@@ -91,5 +97,17 @@
     100%{
         transform: translateY(0%);
         overflow-y: hidden;
+    }
+}
+@keyframes slideToBottom{
+    0%{
+        transform: translateY(0%);
+        overflow-y: hidden;
+        display: block;
+    }
+    100%{
+        transform: translateY(100%);
+        overflow-y: hidden;
+        display: block;
     }
 }

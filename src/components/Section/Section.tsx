@@ -7,7 +7,7 @@ import { content } from "../../content";
 
 
 export const Section:React.FC = () =>{
-    const [isOutside,setOutside] = useState<boolean>(true);
+    const [isOutside,setOutside] = useState<boolean|null>(true);
     const [scrolledPrecent,setScrolledPrecent] = useState<number>(0);
     const dispatch = useDispatch();
 
@@ -18,14 +18,16 @@ export const Section:React.FC = () =>{
     
     
     useEffect(()=>{
-        if(sectionState.isActive === isOutside){
+        if(sectionState.isActive === null){
+            setOutside(null);
+        }else{
             setOutside(!sectionState.isActive);
         }
     },[sectionState])
 
-
     
-    return <section className={`section ${isOutside?"outside":"slideIn"}`} onScroll={(event)=>{
+    
+    return <section className={`section ${isOutside === null?"outside":isOutside?"slideOut":"slideIn"}`} onScroll={(event)=>{
         const element = event.target as HTMLDListElement;
         
         setScrolledPrecent(Math.min(Math.max(element.scrollTop / window.innerHeight*2)*100,100))

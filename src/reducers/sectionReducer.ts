@@ -1,11 +1,11 @@
 const defaultState = {
     sectionId:12,
-    isActive:false,
+    isActive:null,
 } as sectionReducer
 
 export interface sectionReducer{
     sectionId:number;
-    isActive:boolean;
+    isActive:boolean|null;
 }
 
 export interface sectionAction{

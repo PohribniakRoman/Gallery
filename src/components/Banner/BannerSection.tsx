@@ -4,6 +4,7 @@ import { galleryState } from "./Banner";
 import { Counter } from "../Counter";
 import { useDispatch } from "react-redux";
 import { content } from "../../content";
+import {HiArrowNarrowDown} from "react-icons/hi";
 
 export interface BannerSection{
     bgIndex:number;
@@ -20,9 +21,9 @@ export const BannerSection:React.FC<BannerSection> = ({setGalleryState,bgIndex,g
     
     useEffect(()=>{
         if(!galleryState.withAnimation){
-            setTimeout(()=>setGalleryState((prev:galleryState)=>{return{...prev,withAnimation:true}}),1000);
+            setTimeout(()=>setGalleryState((prev:galleryState)=>{return{...prev,withAnimation:true}}),2000);
         }
-    },[galleryState])
+    },[galleryState.withAnimation])
     
     return  <section className={`banner--section ${galleryState.variant==="carousel"?"":"transition"} ${isHidden?`hidden ${side} ${galleryState.withAnimation?"":"none-visibility"}`:""}`}>
             <img draggable={false} src={slider[bgIndex]} className="banner--background-img"/>
@@ -31,6 +32,9 @@ export const BannerSection:React.FC<BannerSection> = ({setGalleryState,bgIndex,g
                     dispatch({type:"ENABLE_SECTION",payload:content[bgIndex].id})
                 }}>{content[bgIndex].bannerTitle}</h1>
                 <p className="banner--section-id"><Counter deley={4000} value={content[bgIndex].id}/></p>
+            </div>
+            <div className="banner--section-scroll">
+                    <HiArrowNarrowDown/>
             </div>
     </section>
 }

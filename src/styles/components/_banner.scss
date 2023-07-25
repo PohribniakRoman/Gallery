@@ -6,25 +6,32 @@
   justify-content: space-between;
   position: relative;
   transition: 1s;
-  &.outside{
-      animation-name: slideOut;
-      animation-duration: 1s;
-      animation-iteration-count: 1;
-      transform: translateY(-100%);
-      display: none ;
+
+  &.outside {
+    animation-name: slideOut;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    transform: translateY(-100%);
+    display: none;
   }
-  &--fullsize{
+  &.slideIn {
+    animation-name: slideInFromTop1;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+  }
+  &--fullsize {
     @include absolute-fullsize;
     left: 0;
     top: 0;
-    transition: 1s;
-    & img{
+    & img {
       object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
-    &.inactive{
+    &.inactive {
       opacity: 0;
       z-index: -1;
-      & div{
+      & div {
         display: none;
       }
     }
@@ -76,6 +83,21 @@
         right: 100%;
       }
     }
+    &-scroll {
+      top: 60%;
+      font-size: 12px;
+      position: absolute;
+      z-index: 3;
+      color: #fff;
+      cursor: context-menu;
+      @include flex-container;
+      & svg {
+        font-size: 24px;
+        animation-name:scrollClip;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+      }
+    }
     &-container {
       position: absolute;
       z-index: 3;
@@ -93,7 +115,7 @@
       font-size: 64px;
       cursor: pointer;
     }
-    &-id{
+    &-id {
       cursor: context-menu;
       user-select: none;
       right: 0;
@@ -104,7 +126,6 @@
       position: absolute;
       margin-left: 10px;
       font-size: 18px;
-
     }
   }
   &--index {
@@ -156,15 +177,15 @@
 }
 
 @keyframes getShown {
-    0%{
-      opacity: 0;
-    }
-    67%{
-      opacity: 0;
-    }
-    100%{
-      opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  67% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes getDark {
@@ -200,16 +221,39 @@
   opacity: 0;
   pointer-events: none;
 }
-* img{
-    user-select: none !important;
+* img {
+  user-select: none !important;
 }
 @keyframes slideOut {
-  0%{
-   transform: translateY(0%); 
-   display: block;
+  0% {
+    transform: translateY(0%);
+    display: flex;
   }
-  100%{
-    transform: translateY(-100%); 
-    display: block;
+  100% {
+    transform: translateY(-100%);
+    display: flex;
+  }
+}
+@keyframes slideInFromTop1 {
+  0% {
+    display: flex;
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+    display: flex;
+  }
+}
+@keyframes scrollClip {
+  0% {
+    opacity: 0;
+    transform: translateY(0%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
   }
 }

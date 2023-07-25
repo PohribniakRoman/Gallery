@@ -1,7 +1,6 @@
 export type contentEntry = {
     id:number;
     bannerTitle:string;
-    background:string;
 } 
 
 export const content = [

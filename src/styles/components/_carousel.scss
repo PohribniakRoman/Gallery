@@ -1,27 +1,49 @@
 .carousel{
-    transition: 0.1s;
+    transition: 1s top,1s left;
     display: flex;
     position: absolute;
     user-select: none;
     top: 50%;
     left: 50%;
-    &.grab{
-        & *::before{
-            cursor: grab !important;
-        }
-    }
+    cursor: grab;
     &.inactive{
-        z-index: 2;
-        top: 93%;
-        left: 78%;
-        transform:translate(-50%,-50%)!important;
+        z-index: 3;
+        top: 92%;
+        left: 59%;
+        transition: 1s;
+        transform: translate(0,-50%) !important;
+        & .carousel--window{
+            opacity: 1;
+            width: 5vw;
+            height: 11vh;
+            transform: translate(-0.1vw,-0.7vh);
+            z-index: 10;
+        }
+        cursor: context-menu;
         & .carousel--item{
             width: 5vw;
             height: 10vh;
             & img{
                 object-position: center !important;
             }
+            &::before{
+                cursor: pointer;
+            }
+            &.selected{
+                &::before{
+                    background-color: rgba($color: #000000, $alpha: 0.0);
+                }
+            }
         }
+    }
+    &--window{
+        z-index: -1;
+        opacity: 0;
+        position: absolute;
+        border: 2px solid #fff;
+        width: 22vw;
+        height: 50vh;
+        transition: .3s margin,1s width,1s height,1s opacity;
     }
     &--cross{
         @include flex-container;
@@ -30,29 +52,31 @@
         top: 50%;
         transform: translateY(-50%);
         color: #fff;
-        cursor: pointer;
         & svg {
             transition: 1s;
             font-size: 30px;
         }
     }
     &--item{
+        transition: 1s;
         width: 22vw;
         height: 50vh;
         position: relative;
         @include flex-container;
         & img{
             object-fit: cover;
+            transition: .1s;
             width: 90%;
             height: 100%;
         }
         &::before{
-            cursor: pointer;
+            cursor: grab;
             @include pseudo-element;
             width: 90%;
             height: 100%;
+            transition: .6s;
             z-index: 1;
-            background-color: rgba($color: #000000, $alpha: 0.1);
+            background-color: rgba($color: #000000, $alpha: 0.25);
         }
     }
 }
