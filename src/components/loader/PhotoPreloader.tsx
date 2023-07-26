@@ -8,7 +8,13 @@ import photo7 from "../../assets/loader/7.jpg";
 import photo8 from "../../assets/loader/8.jpg";
 import photo9 from "../../assets/loader/9.jpg";
 import section1 from "../../assets/section/1.jpg";
+import section2 from "../../assets/section/2.jpg";
 import section3 from "../../assets/section/3.jpg";
+import section4 from "../../assets/section/4.jpg";
+import section5 from "../../assets/section/5.jpg";
+import section6 from "../../assets/section/6.jpg";
+import section7 from "../../assets/section/7.jpg";
+import section8 from "../../assets/section/8.jpg";
 import slider1 from "../../assets/slider/1.jpg";
 import slider2 from "../../assets/slider/2.jpg";
 import slider3 from "../../assets/slider/3.jpg";
@@ -35,7 +41,8 @@ export const slider = [
 ]
 
 export const sectionGallery = [
-    section1,section3
+    section1,section2,section3,section4,
+    section5,section6,section7,section8
 ] 
 
 

@@ -4,21 +4,6 @@
     top: 0;
     color: #fff;
     overflow-x: hidden;
-    &::after{
-        @include pseudo-element;
-        width: 200%;
-        top: 0;
-        height: 200%;
-        left: -50%;
-        background: radial-gradient(circle, rgba(255,255,255,0) 9%, rgba(20,20,20,0.5550595238095238) 45%, rgba(20,20,20,1) 90%);
-    }
-    &::before{
-        @include pseudo-element;
-        width: 200%;
-        height: 200%;
-        transform: translate(-50%,-50%);
-        background: radial-gradient(circle, rgba(255,255,255,0) 9%, rgba(20,20,20,0.5550595238095238) 45%, rgba(20,20,20,1) 90%);
-    }
     &.slideOut{
         animation-name: slideToBottom;
         animation-duration: 1s;
@@ -53,24 +38,76 @@
             scale: 0.95;
         }
     }
+    &__content{
+        &-container{
+            width: 40%;
+            background-color: rgba($color: $background-color, $alpha: 0.8);
+            height: 100%;
+            @include flex-container;
+            flex-direction: column;
+        }
+        &--grid{
+            display: grid;
+            width: 80%;
+            margin: 60px auto;
+            height: 40vh;
+            grid-template-columns: repeat(3,1fr);
+            grid-template-rows: repeat(2,1fr);
+            &-item{
+                @include flex-container;
+                flex-direction: column;
+                & svg{
+                    font-size: 46px;
+                    padding: 10px;
+                }
+                & span{
+                    width: 70%;
+                    line-height: 1.4;
+                    text-align: center;
+                }
+                &:nth-child(1),&:nth-child(2),&:nth-child(3){
+                    border-bottom: 2px solid #fff;
+                }
+                &:nth-child(1),&:nth-child(2),&:nth-child(4),&:nth-child(5){
+                    border-right: 2px solid #fff;
+                }
+            }
+        }
+        &--title{
+            font-family: 'Dai Banna SIL', serif;
+            text-align: center;
+            z-index: 1;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 64px;
+            position: relative;
+        }
+        &--underscore{
+            margin: 10px auto;
+            width: 25%;
+            height: 2px;
+            background-color: #fff;            
+        }
+        &--description{
+            font-family: 'Dai Banna SIL', serif;
+            width: 65%;
+            font-size: 18px;
+            line-height: 1.2;
+            text-align: center;
+            margin: 0 auto;
+        }
+    }
     &--wrapper{
+        @include fullsize;  
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         background-attachment: fixed;
-        @include fullsize;
         display: flex;
+        user-select: none;
         align-items: flex-end;
         flex-direction: column;
-    }
-    &--title{
-        text-align: center;
-        margin-top: 120px;
-        z-index: 1;
-        font-style: italic;
-        font-weight: 300;
-        width:35%;
-        font-size: 64px;
+        background-color: $background-color;
     }
     &--scroll{
         position: fixed;
