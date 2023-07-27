@@ -109,9 +109,11 @@
       color: #fff;
     }
     &-title {
+      @include flex-container;
+      height: 100%;
       text-align: center;
       user-select: none;
-      padding-right: 25px;
+      padding: 0 25px;
       font-size: 64px;
       cursor: pointer;
     }
@@ -169,7 +171,7 @@
       font-size: 30px;
     }
     &.right {
-      left: 85%;
+      right: 15%;
     }
     &.left {
       left: 15%;

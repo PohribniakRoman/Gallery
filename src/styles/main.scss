@@ -35,3 +35,70 @@ body{
     background: $background-color;
     overflow: hidden;
 }
+
+@media (orientation:landscape) {
+    *{
+        // background-color: #fff;
+    }
+}
+@media (max-width:1500px) {
+    .section__content-container{
+        width: 100%;
+    }
+    .section__content--grid{
+        width: 45%;
+    }
+}
+@media (max-width:1000px) {
+    .section__content--underscore{
+        width: 60%;
+    }
+    .section__content--grid{
+        width: 75%;
+    }
+}
+@media (max-width:650px) {
+    .carousel{
+        display: none;
+    }
+    .banner--section-title{
+        font-size: 32px;
+    }
+    .section__content-container{
+        padding-top: 50px;
+    }
+    .section__content--description{
+        width: 90%;
+    }
+    .section__content--grid{
+        width:90%;
+        font-size: 12px;
+    }
+    .banner--swap{
+        & svg{
+            font-size: 24px;
+        }
+    }
+    .banner--swap.left{
+        left: 7%;
+    }
+    .banner--swap.right{
+        right: 7%;
+    }
+    @keyframes sideItemGrowBottom {
+        0% {
+          width: $start-sizeX;
+          height: $start-sizeY;
+        }
+        60% {
+          width: $start-sizeX;
+          height: $start-sizeY;
+          translate: 0 0vw;
+        }
+        100% {
+          width: 100vw;
+          @include fullsize;
+          translate: 0 120.5vw;
+        }
+      }
+}

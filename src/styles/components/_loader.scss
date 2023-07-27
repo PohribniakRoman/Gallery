@@ -161,7 +161,6 @@
     height: $start-sizeY;
   }
   100% {
-    width: 100vw;
     @include fullsize;
   }
 }

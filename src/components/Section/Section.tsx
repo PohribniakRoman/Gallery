@@ -36,7 +36,7 @@ export const Section:React.FC = () =>{
         <div className="section--scroll" style={{height:scrolledPrecent+"vh"}}/>
         <div style={{backgroundImage:`url(${sectionGallery[bacgroundIndex]})`}} className="section--wrapper">
             <div className="section__content-container">
-                <h1 className="section__content--title">{data.bannerTitle}</h1>
+                <h1 className="section__content--title">{data.bannerTitle+" "+(bacgroundIndex+1)}</h1>
                 <div className="section__content--underscore"/>
                 <p className="section__content--description">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum dolore accusantium eaque inventore in quo maiores molestiae nisi laboriosam animi.
